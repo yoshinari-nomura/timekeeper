@@ -1,4 +1,4 @@
-﻿/*
+/*
 The MIT License (MIT)
 
 Copyright (c) 2014-2016 Ichiro Maruta
@@ -160,18 +160,14 @@ $(function(){
 	function resize_display() {
 		var height=$('body').height();
 		var width=$('body').width();
-		var theight=Math.min(height*3/5,width*1.95/5);
-		$('#time').css('top',(height-theight)/2*1.1);
+		var theight=Math.min(height*3/7,width*1.95/7);
+		$('#time').css('top', theight/15);
 		$('#time').css('font-size',theight+'px');
 		$('#time').css('line-height',theight+'px');
-		var sheight=theight/6;
-		$('#state').css('top',height/2-theight/2-sheight/2);
-		$('#state').css('font-size',sheight+'px');
-		$('#state').css('line-height',sheight+'px');
-		var iheight=sheight;
-		$('#info').css('top',height/2+theight/2);
+		var iheight=theight/5;
+		$('#info').css('top', theight * 1.1);
 		$('#info').css('font-size',iheight+'px');
-		$('#info').css('line-height',iheight+'px');
+		$('#info').css('line-height',iheight*1.2+'px');
 	}
 	$(window).bind("resize", resize_display);
 
