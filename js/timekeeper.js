@@ -178,7 +178,7 @@ $(function(){
 		event.preventDefault();
 		audio_chime1.load();
 		audio_chime1.currentTime = 0;
-		audio_chime1.volume = $('#volume').val();
+		audio_chime1.volume = get_volume();
 		audio_chime1.play();
 	});
 
@@ -209,7 +209,7 @@ $(function(){
 
 					if((last_time < time1 && time1 <= cur_time) || (last_time==time1 && cur_time==time1)){
 						changePhaseClass('1');
-						audio_chime1.volume = $('#volume').val();
+						audio_chime1.volume = get_volume();
 						audio_chime1.currentTime = 0;
 						audio_chime1.play();
 					}
@@ -217,14 +217,14 @@ $(function(){
 					if((last_time < time2 && time2 <= cur_time) || (last_time==time2 && cur_time==time2)){
 						changePhaseClass('2');
 						audio_chime2.currentTime = 0;
-						audio_chime2.volume = $('#volume').val();
+						audio_chime2.volume = get_volume();
 						audio_chime2.play();
 					}
 
 					if((last_time < time3 && time3 <= cur_time) || (last_time==time3 && cur_time==time3)){
 						changePhaseClass('3');
 						audio_chime3.currentTime = 0;
-						audio_chime3.volume = $('#volume').val();
+						audio_chime3.volume = get_volume();
 						audio_chime3.play();
 					}
 
@@ -232,4 +232,9 @@ $(function(){
 				last_time=cur_time;
 			}
 	})
+
+	function get_volume(){
+		// stay volume within 0 to 1
+		return Math.max(Math.min(1,$('#volume').val()),0);
+	}
 });
