@@ -27,6 +27,7 @@ $(function(){
 	$('#time1').val('15:00');
 	$('#time2').val('20:00');
 	$('#time3').val('25:00');
+	$('#volume').val('0.4');
 	$('#info').html("Click to edit this message.");
 	function getHashParams() {
     var hashParams = {};
@@ -48,6 +49,7 @@ $(function(){
     if(params.t1 !== undefined) $('#time1').val(params.t1);
 		if(params.t2 !== undefined) $('#time2').val(params.t2);
 		if(params.t3 !== undefined) $('#time3').val(params.t3);
+		if(params.volume !== undefined) $('#volume').val(params.volume);
 		if(params.m !== undefined) $('#info').html(params.m);
 		if(loadedcss !== ''){
 			location.reload();
@@ -64,6 +66,7 @@ $(function(){
     var hashstr = '#t1=' + $('#time1').val()
 		+ '&t2=' + $('#time2').val()
 		+ '&t3=' + $('#time3').val()
+		+ '&volume=' + $('#volume').val()
 		+ '&m=' + encodeURIComponent($('#info').html());
 		if(loadedcss !== 'default'){
 			hashstr = hashstr + '&th=' + encodeURIComponent(loadedcss);
@@ -83,7 +86,7 @@ $(function(){
 	parseHashParams();
 	updateHash();
 
-	$('#time1,#time2,#time3,#info').change(function(){
+	$('#time1,#time2,#time3,#volume,#info').change(function(){
 		updateHash();
 	});
 
@@ -99,10 +102,6 @@ $(function(){
 	audio_chime1 = new Audio("./wav/chime1.wav");
 	audio_chime2 = new Audio("./wav/chime2.wav");
 	audio_chime3 = new Audio("./wav/chime3.wav");
-
-	audio_chime1.volume = 0.4;
-	audio_chime2.volume = 0.4;
-	audio_chime3.volume = 0.4;
 
 	function changeStateClass(s) {
 		$('body').removeClass(function(index, className) {
@@ -179,6 +178,7 @@ $(function(){
 		event.preventDefault();
 		audio_chime1.load();
 		audio_chime1.currentTime = 0;
+		audio_chime1.volume = $('#volume').val();
 		audio_chime1.play();
 	});
 
@@ -209,6 +209,7 @@ $(function(){
 
 					if((last_time < time1 && time1 <= cur_time) || (last_time==time1 && cur_time==time1)){
 						changePhaseClass('1');
+						audio_chime1.volume = $('#volume').val();
 						audio_chime1.currentTime = 0;
 						audio_chime1.play();
 					}
@@ -216,12 +217,14 @@ $(function(){
 					if((last_time < time2 && time2 <= cur_time) || (last_time==time2 && cur_time==time2)){
 						changePhaseClass('2');
 						audio_chime2.currentTime = 0;
+						audio_chime2.volume = $('#volume').val();
 						audio_chime2.play();
 					}
 
 					if((last_time < time3 && time3 <= cur_time) || (last_time==time3 && cur_time==time3)){
 						changePhaseClass('3');
 						audio_chime3.currentTime = 0;
+						audio_chime3.volume = $('#volume').val();
 						audio_chime3.play();
 					}
 
