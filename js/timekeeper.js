@@ -100,6 +100,10 @@ $(function(){
 	audio_chime2 = new Audio("./wav/chime2.wav");
 	audio_chime3 = new Audio("./wav/chime3.wav");
 
+	audio_chime1.volume = 0.4;
+	audio_chime2.volume = 0.4;
+	audio_chime3.volume = 0.4;
+
 	function changeStateClass(s) {
 		$('body').removeClass(function(index, className) {
 			return (className.match(/\bstate-\S+/g) || []).join(' ');
