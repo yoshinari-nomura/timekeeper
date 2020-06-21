@@ -76,7 +76,14 @@ $(function(){
 	    history.replaceState(undefined, undefined, hashstr);
 		}catch(e){
 		}
+		updateTitle();
   };
+
+	function updateTitle() {
+		var msg = $("#info").clone();
+		msg.children().text("");
+		document.title =  msg.text() + " - Time Keeper";
+	};
 
 	$(window).on('hashchange', function() {
     parseHashParams();
